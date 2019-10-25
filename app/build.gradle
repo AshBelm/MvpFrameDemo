@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+def config = rootProject.ext.android
+
+def library = rootProject.ext.supDependence
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        applicationId "com.mcmo.z.mvpframedemo.ncc"
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation library.suppoutDesign
+    implementation library.retrofit2
+    implementation library.arouter
+//    annotationProcessor library.arouterProcessor
+    testImplementation library.junit
+    androidTestImplementation library.test
+    androidTestImplementation library.testEspresso
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation project(path: ':baselibrary')
+}
